@@ -1,7 +1,7 @@
 # Social Connect
 
 Do you want to save yourself trouble programming a chat into your flutter app? <br>
-Why not just link to already existing social messing applications? <br>
+Why not just link to already existing social messengers? <br>
 With **social_connect** you can fill in your details and set privacy settings. <br>
 Others then just click on their prefered social messenger and get forwarded to your profile.
 
