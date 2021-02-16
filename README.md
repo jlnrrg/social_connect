@@ -18,7 +18,7 @@ Others then just click on their prefered social messenger and get forwarded to y
 - SocialShare.edit provides the onChanged callback, <br>where the SocialAccount can be further processed (eg. written to a db)
 
 
-## Included Services
+## Included Services (24)
 - discord
 - element
 - email

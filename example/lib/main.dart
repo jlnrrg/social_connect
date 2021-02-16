@@ -52,35 +52,9 @@ class MessengerShare extends HookWidget {
     return Container(
         child: ListView(
       shrinkWrap: true,
-      children:
-          socialList.map((e) => _buildMessengerField(context, e)).toList(),
+      children: socialAccountsAll
+          .map((e) => _buildMessengerField(context, e))
+          .toList(),
     ));
   }
 }
-
-final socialList = <SocialAccount>[
-  SocialAccount.discord(''),
-  SocialAccount.element(''),
-  SocialAccount.email(''),
-  SocialAccount.facebook(''),
-  SocialAccount.icq(''),
-  SocialAccount.imgur(''),
-  SocialAccount.instagram(''),
-  SocialAccount.line(''),
-  SocialAccount.linkedin(''),
-  SocialAccount.phone(''),
-  SocialAccount.reddit(''),
-  SocialAccount.sinaweibo(''),
-  SocialAccount.skype(''),
-  SocialAccount.snapchat(''),
-  SocialAccount.telegram(''),
-  SocialAccount.threema(''),
-  SocialAccount.tiktok(''),
-  SocialAccount.tinder(''),
-  SocialAccount.tumblr(''),
-  SocialAccount.twitter(''),
-  SocialAccount.viber(''),
-  SocialAccount.wechat(''),
-  SocialAccount.whatsapp(null),
-  SocialAccount.xing(''),
-];
