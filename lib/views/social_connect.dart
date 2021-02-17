@@ -3,13 +3,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:social_connect/domain/value_objects.dart';
 import 'package:social_connect/domain/value_unions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SocialShare extends StatefulHookWidget {
+class SocialShare extends StatefulWidget {
   SocialShare({
     Key key,
     this.socialShareWidget = const SocialShareWidget.show(),
@@ -55,6 +54,13 @@ class SocialShareState extends State<SocialShare> {
   SocialShareState(this.socialAccount) : super();
   SocialAccount socialAccount;
   bool isPublic = true;
+  TextEditingController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController(text: socialAccount.identifier);
+  }
 
   /// sets the [socialAccount]s [SocialAccountVisibility] and calls [widget.onChanged]
   void setSocialAccountVisibility(bool isPublic) {
@@ -70,9 +76,6 @@ class SocialShareState extends State<SocialShare> {
   }
 
   Widget _buildTextFormField(BuildContext context) {
-    final TextEditingController controller =
-        useTextEditingController(text: socialAccount.identifier);
-
     return InkWell(
         onTap: () => _launchUrl(),
         child: TextFormField(
@@ -150,6 +153,11 @@ class SocialShareState extends State<SocialShare> {
               padding: EdgeInsets.only(left: 10), child: _buildSwitch(context))
       ],
     );
+  }
+
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }
 
