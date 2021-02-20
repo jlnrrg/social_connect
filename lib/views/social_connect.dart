@@ -15,10 +15,14 @@ class SocialShare extends StatefulWidget {
     @required this.initialSocialAccount,
     this.isEdit = false,
     @required this.onChanged,
+    this.asIcon,
   }) : super(key: key);
 
   factory SocialShare.show({
     Key key,
+
+    /// shows the widget in a IconButton format
+    bool dense = false,
     @required SocialAccount socialAccount,
   }) =>
       SocialShare(
@@ -26,6 +30,7 @@ class SocialShare extends StatefulWidget {
         initialSocialAccount: socialAccount,
         socialShareWidget: SocialShareWidget.show(),
         isEdit: false,
+        asIcon: dense,
         onChanged: (_) => null,
       );
 
@@ -38,12 +43,14 @@ class SocialShare extends StatefulWidget {
         initialSocialAccount: socialAccount,
         socialShareWidget: SocialShareWidget.edit(),
         isEdit: true,
+        asIcon: false,
         onChanged: onChanged,
       );
 
   final SocialShareWidget socialShareWidget;
   final SocialAccount initialSocialAccount;
   final bool isEdit;
+  final bool asIcon;
   final Function(SocialAccount) onChanged;
 
   @override
@@ -55,6 +62,8 @@ class SocialShareState extends State<SocialShare> {
   SocialAccount socialAccount;
   bool isPublic = true;
   TextEditingController controller;
+
+  double get radius => 20;
 
   @override
   void initState() {
@@ -141,8 +150,7 @@ class SocialShareState extends State<SocialShare> {
         ));
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildRow(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -153,6 +161,26 @@ class SocialShareState extends State<SocialShare> {
               padding: EdgeInsets.only(left: 10), child: _buildSwitch(context))
       ],
     );
+  }
+
+  Widget _buildIcon(BuildContext context) {
+    return Material(
+        shape: CircleBorder(),
+        clipBehavior: Clip.hardEdge,
+        child: Ink(
+            width: 2 * radius,
+            height: 2 * radius,
+            child: Tooltip(
+                message: socialAccount.name,
+                child: InkWell(
+                  onTap: () => _launchUrl(),
+                  child: socialAccount.icon,
+                ))));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.asIcon ? _buildIcon(context) : _buildRow(context);
   }
 
   void dispose() {

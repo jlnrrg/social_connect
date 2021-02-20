@@ -18,7 +18,24 @@ class MyApp extends StatelessWidget {
         home: Scaffold(
             body: SafeArea(
                 child: Column(
-          children: [Expanded(child: MessengerShare())],
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ConstrainedBox(
+                constraints: new BoxConstraints(
+                  minHeight: 35.0,
+                  maxHeight: 50.0,
+                ),
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: socialAccountsAll.length,
+                    itemBuilder: (context, idx) {
+                      return SocialShare.show(
+                        socialAccount: socialAccountsAll[idx],
+                        dense: true,
+                      );
+                    })),
+            Expanded(child: MessengerShare())
+          ],
         ))));
   }
 }
