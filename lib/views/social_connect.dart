@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:social_connect/domain/core/exceptions.dart';
 import 'package:social_connect/domain/value_objects.dart';
 import 'package:social_connect/domain/value_unions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// [SocialShare.show] allows the user on tap to be forwarded to the according app or link in the web browser.
+/// it is best to catch for [LaunchAppException]
 class SocialShare extends StatefulWidget {
   SocialShare({
     Key key,
@@ -95,7 +98,12 @@ class SocialShareState extends State<SocialShare> {
                 disabledBorder: InputBorder.none
                 // hintText: 'hint',
                 ),
-            inputFormatters: [ToIdentifierInputFormatter(socialAccount)],
+            inputFormatters: [
+              ToIdentifierInputFormatter(socialAccount),
+              FilteringTextInputFormatter.deny(
+                RegExp('\\s'),
+              )
+            ],
             onChanged: (String value) {
               setState(() {
                 socialAccount = socialAccount.copyWith(identifier: value);
@@ -110,8 +118,7 @@ class SocialShareState extends State<SocialShare> {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      await launch(url, forceWebView: true, enableDomStorage: true);
-      throw 'Could not launch $url';
+      throw LaunchAppException(url);
     }
   }
 

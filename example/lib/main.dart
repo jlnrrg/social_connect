@@ -20,20 +20,20 @@ class MyApp extends StatelessWidget {
                 child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // ConstrainedBox(
-            //     constraints: BoxConstraints(
-            //       minHeight: 35.0,
-            //       maxHeight: 50.0,
-            //     ),
-            //     child: ListView.builder(
-            //         scrollDirection: Axis.horizontal,
-            //         itemCount: socialAccountsAll.length,
-            //         itemBuilder: (context, idx) {
-            //           return SocialShare.show(
-            //             socialAccount: socialAccountsAll[idx],
-            //             dense: true,
-            //           );
-            //         })),
+            ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: 35.0,
+                  maxHeight: 50.0,
+                ),
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: socialAccountsAll.length,
+                    itemBuilder: (context, idx) {
+                      return SocialShare.show(
+                        socialAccount: socialAccountsAll[idx],
+                        dense: true,
+                      );
+                    })),
             Expanded(child: MessengerShare())
           ],
         ))));
