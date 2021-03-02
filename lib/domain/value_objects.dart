@@ -246,7 +246,7 @@ abstract class SocialAccount with _$SocialAccount {
             color: iconColor ?? const Color(0xFFff4500)),
         name: 'Reddit',
         identifier: username,
-        prelink: (String username) => 'https://www.reddit.com/user/',
+        prelink: (String username) => 'https://www.reddit.com/user/$username',
         visibility: visibility ?? const SocialAccountVisibility.public(),
       );
 

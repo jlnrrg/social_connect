@@ -20,20 +20,20 @@ class MyApp extends StatelessWidget {
                 child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ConstrainedBox(
-                constraints: new BoxConstraints(
-                  minHeight: 35.0,
-                  maxHeight: 50.0,
-                ),
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: socialAccountsAll.length,
-                    itemBuilder: (context, idx) {
-                      return SocialShare.show(
-                        socialAccount: socialAccountsAll[idx],
-                        dense: true,
-                      );
-                    })),
+            // ConstrainedBox(
+            //     constraints: BoxConstraints(
+            //       minHeight: 35.0,
+            //       maxHeight: 50.0,
+            //     ),
+            //     child: ListView.builder(
+            //         scrollDirection: Axis.horizontal,
+            //         itemCount: socialAccountsAll.length,
+            //         itemBuilder: (context, idx) {
+            //           return SocialShare.show(
+            //             socialAccount: socialAccountsAll[idx],
+            //             dense: true,
+            //           );
+            //         })),
             Expanded(child: MessengerShare())
           ],
         ))));
@@ -55,13 +55,17 @@ class MessengerShare extends HookWidget {
         key: Key('show:' + acc.value.identifier), socialAccount: acc.value);
 
     final editWidget = SocialShare.edit(
-        socialAccount: acc.value,
-        onChanged: (newAcc) {
-          debugPrint(newAcc.toString());
-          acc.value = newAcc;
-        });
+      socialAccount: acc.value,
+      onChanged: (newAcc) {
+        debugPrint(newAcc.toString());
+        acc.value = newAcc;
+      },
+    );
 
-    return Column(children: <Widget>[editWidget, showWidget]);
+    return Column(children: <Widget>[
+      editWidget,
+      showWidget,
+    ]);
   }
 
   @override

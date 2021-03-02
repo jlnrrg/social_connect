@@ -58,18 +58,14 @@ class SocialShare extends StatefulWidget {
 }
 
 class SocialShareState extends State<SocialShare> {
-  SocialShareState(this.socialAccount) : super();
+  SocialShareState(this.socialAccount)
+      : controller = TextEditingController(text: socialAccount.identifier),
+        super();
   SocialAccount socialAccount;
   bool isPublic = true;
   TextEditingController controller;
 
   double get radius => 20;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = TextEditingController(text: socialAccount.identifier);
-  }
 
   /// sets the [socialAccount]s [SocialAccountVisibility] and calls [widget.onChanged]
   void setSocialAccountVisibility(bool isPublic) {
@@ -99,21 +95,10 @@ class SocialShareState extends State<SocialShare> {
                 disabledBorder: InputBorder.none
                 // hintText: 'hint',
                 ),
-            // validator: (String value) => null, //validatorCallback(value),
+            inputFormatters: [ToIdentifierInputFormatter(socialAccount)],
             onChanged: (String value) {
-              // transform value, if copied with link
-              final identifier =
-                  splitUserNameFromLink(socialAccount.prelink, value);
-              final test = controller.text.length.compareTo(identifier.length);
-              final selection = max<int>(
-                  min<int>(controller.selection.end - test, identifier.length),
-                  0);
-
-              controller.text = identifier;
-              controller.selection = TextSelection.collapsed(offset: selection);
-
               setState(() {
-                socialAccount = socialAccount.copyWith(identifier: identifier);
+                socialAccount = socialAccount.copyWith(identifier: value);
               });
               widget.onChanged(socialAccount);
             }));
@@ -125,6 +110,7 @@ class SocialShareState extends State<SocialShare> {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
+      await launch(url, forceWebView: true, enableDomStorage: true);
       throw 'Could not launch $url';
     }
   }
@@ -189,20 +175,60 @@ class SocialShareState extends State<SocialShare> {
   }
 }
 
-/// gets the username from [value] by removing occurances of [prelink] and ’@'
-String splitUserNameFromLink(String Function(String) prelink, String value) {
-  final key = UniqueKey();
-  final splitLink = prelink(key.toString()).split(key.toString());
+class ToIdentifierInputFormatter extends TextInputFormatter {
+  ToIdentifierInputFormatter(this.socialAccount) : super();
 
-  final s1 = RegExp.escape(splitLink.first).replaceAll('/', '\\/');
-  final s2 = RegExp.escape(splitLink.last).replaceAll('/', '\\/');
+  final SocialAccount socialAccount;
 
-  /// finds username in link, even if link+username is username; if not link and @ is found, pick text behind @
-  final re = RegExp('(?<=$s1)(?!http)([^@].*)(?=$s2)|(?<=@)(.*)');
-  final match = re.firstMatch(value);
-  if (match != null) {
-    return match.group(0);
-  } else {
+  /// gets the username from [value] by removing occurances of [prelink]
+  String splitUserNameFromLink(String Function(String) prelink, String value) {
+    // no prelink defined
+    if (prelink('').isEmpty) {
+      return value;
+    }
+
+    final key = UniqueKey();
+    final splitLink = prelink(key.toString()).split(key.toString());
+
+    final s1 = RegExp.escape(splitLink.first).replaceAll('/', '\\/');
+    final s2 = RegExp.escape(splitLink.last).replaceAll('/', '\\/');
+
+    /// finds username in link, even if link+username is username
+    final re = RegExp('(?<=$s1)(?!http)(.*)(?=$s2)');
+    final match = re.firstMatch(value);
+    if (match != null) {
+      return match.group(0);
+    } else {
+      return value;
+    }
+  }
+
+  /// removes leading '@' of Username
+  String stripUserNameOfAt(String value) {
+    if (value.startsWith('@')) {
+      return value.substring(1);
+    }
     return value;
+  }
+
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    final valueTrimmed = newValue.text.trim();
+    final identifierWithoutLink =
+        splitUserNameFromLink(socialAccount.prelink, valueTrimmed);
+    final identifierWithoutAt = stripUserNameOfAt(identifierWithoutLink);
+
+    final selectionDifference =
+        newValue.text.length - identifierWithoutAt.length;
+    final selection = max<int>(
+        min<int>(newValue.selection.end - selectionDifference,
+            identifierWithoutAt.length),
+        0);
+
+    return TextEditingValue(
+      text: identifierWithoutAt,
+      selection: TextSelection.collapsed(offset: selection),
+    );
   }
 }
