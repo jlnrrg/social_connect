@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-part of 'value_objects.dart';
+part of 'social_account.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -19,13 +19,13 @@ class _$SocialAccountTearOff {
       @required String name,
       @required String Function(String) prelink,
       @required String identifier,
-      @required SocialAccountVisibility visibility}) {
+      @required bool isPublic}) {
     return _MessengerAccount(
       icon: icon,
       name: name,
       prelink: prelink,
       identifier: identifier,
-      visibility: visibility,
+      isPublic: isPublic,
     );
   }
 }
@@ -40,7 +40,7 @@ mixin _$SocialAccount {
   String get name;
   String Function(String) get prelink;
   String get identifier;
-  SocialAccountVisibility get visibility;
+  bool get isPublic;
 
   @JsonKey(ignore: true)
   $SocialAccountCopyWith<SocialAccount> get copyWith;
@@ -56,9 +56,7 @@ abstract class $SocialAccountCopyWith<$Res> {
       String name,
       String Function(String) prelink,
       String identifier,
-      SocialAccountVisibility visibility});
-
-  $SocialAccountVisibilityCopyWith<$Res> get visibility;
+      bool isPublic});
 }
 
 /// @nodoc
@@ -76,7 +74,7 @@ class _$SocialAccountCopyWithImpl<$Res>
     Object name = freezed,
     Object prelink = freezed,
     Object identifier = freezed,
-    Object visibility = freezed,
+    Object isPublic = freezed,
   }) {
     return _then(_value.copyWith(
       icon: icon == freezed ? _value.icon : icon as Icon,
@@ -86,20 +84,8 @@ class _$SocialAccountCopyWithImpl<$Res>
           : prelink as String Function(String),
       identifier:
           identifier == freezed ? _value.identifier : identifier as String,
-      visibility: visibility == freezed
-          ? _value.visibility
-          : visibility as SocialAccountVisibility,
+      isPublic: isPublic == freezed ? _value.isPublic : isPublic as bool,
     ));
-  }
-
-  @override
-  $SocialAccountVisibilityCopyWith<$Res> get visibility {
-    if (_value.visibility == null) {
-      return null;
-    }
-    return $SocialAccountVisibilityCopyWith<$Res>(_value.visibility, (value) {
-      return _then(_value.copyWith(visibility: value));
-    });
   }
 }
 
@@ -115,10 +101,7 @@ abstract class _$MessengerAccountCopyWith<$Res>
       String name,
       String Function(String) prelink,
       String identifier,
-      SocialAccountVisibility visibility});
-
-  @override
-  $SocialAccountVisibilityCopyWith<$Res> get visibility;
+      bool isPublic});
 }
 
 /// @nodoc
@@ -138,7 +121,7 @@ class __$MessengerAccountCopyWithImpl<$Res>
     Object name = freezed,
     Object prelink = freezed,
     Object identifier = freezed,
-    Object visibility = freezed,
+    Object isPublic = freezed,
   }) {
     return _then(_MessengerAccount(
       icon: icon == freezed ? _value.icon : icon as Icon,
@@ -148,9 +131,7 @@ class __$MessengerAccountCopyWithImpl<$Res>
           : prelink as String Function(String),
       identifier:
           identifier == freezed ? _value.identifier : identifier as String,
-      visibility: visibility == freezed
-          ? _value.visibility
-          : visibility as SocialAccountVisibility,
+      isPublic: isPublic == freezed ? _value.isPublic : isPublic as bool,
     ));
   }
 }
@@ -162,12 +143,12 @@ class _$_MessengerAccount implements _MessengerAccount {
       @required this.name,
       @required this.prelink,
       @required this.identifier,
-      @required this.visibility})
+      @required this.isPublic})
       : assert(icon != null),
         assert(name != null),
         assert(prelink != null),
         assert(identifier != null),
-        assert(visibility != null);
+        assert(isPublic != null);
 
   @override
   final Icon icon;
@@ -178,7 +159,7 @@ class _$_MessengerAccount implements _MessengerAccount {
   @override
   final String identifier;
   @override
-  final SocialAccountVisibility visibility;
+  final bool isPublic;
 
   bool _didlink = false;
   String _link;
@@ -194,7 +175,7 @@ class _$_MessengerAccount implements _MessengerAccount {
 
   @override
   String toString() {
-    return 'SocialAccount._(icon: $icon, name: $name, prelink: $prelink, identifier: $identifier, visibility: $visibility, link: $link)';
+    return 'SocialAccount._(icon: $icon, name: $name, prelink: $prelink, identifier: $identifier, isPublic: $isPublic, link: $link)';
   }
 
   @override
@@ -211,9 +192,9 @@ class _$_MessengerAccount implements _MessengerAccount {
             (identical(other.identifier, identifier) ||
                 const DeepCollectionEquality()
                     .equals(other.identifier, identifier)) &&
-            (identical(other.visibility, visibility) ||
+            (identical(other.isPublic, isPublic) ||
                 const DeepCollectionEquality()
-                    .equals(other.visibility, visibility)));
+                    .equals(other.isPublic, isPublic)));
   }
 
   @override
@@ -223,7 +204,7 @@ class _$_MessengerAccount implements _MessengerAccount {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(prelink) ^
       const DeepCollectionEquality().hash(identifier) ^
-      const DeepCollectionEquality().hash(visibility);
+      const DeepCollectionEquality().hash(isPublic);
 
   @JsonKey(ignore: true)
   @override
@@ -237,7 +218,7 @@ abstract class _MessengerAccount implements SocialAccount {
       @required String name,
       @required String Function(String) prelink,
       @required String identifier,
-      @required SocialAccountVisibility visibility}) = _$_MessengerAccount;
+      @required bool isPublic}) = _$_MessengerAccount;
 
   @override
   Icon get icon;
@@ -248,7 +229,7 @@ abstract class _MessengerAccount implements SocialAccount {
   @override
   String get identifier;
   @override
-  SocialAccountVisibility get visibility;
+  bool get isPublic;
   @override
   @JsonKey(ignore: true)
   _$MessengerAccountCopyWith<_MessengerAccount> get copyWith;

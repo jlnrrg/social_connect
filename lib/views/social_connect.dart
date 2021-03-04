@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:social_connect/domain/core/exceptions.dart';
-import 'package:social_connect/domain/value_objects.dart';
+import 'package:social_connect/domain/social_account.dart';
 import 'package:social_connect/domain/value_unions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,6 +18,7 @@ class SocialShare extends StatefulWidget {
     @required this.initialSocialAccount,
     this.isEdit = false,
     @required this.onChanged,
+    @required this.onTap,
     this.asIcon,
   }) : super(key: key);
 
@@ -27,6 +28,7 @@ class SocialShare extends StatefulWidget {
     /// shows the widget in a IconButton format
     bool dense = false,
     @required SocialAccount socialAccount,
+    Future<void> Function(String url) onTap = _launchUrl,
   }) =>
       SocialShare(
         key: key,
@@ -35,6 +37,7 @@ class SocialShare extends StatefulWidget {
         isEdit: false,
         asIcon: dense,
         onChanged: (_) => null,
+        onTap: onTap,
       );
 
   factory SocialShare.edit(
@@ -48,6 +51,7 @@ class SocialShare extends StatefulWidget {
         isEdit: true,
         asIcon: false,
         onChanged: onChanged,
+        onTap: (_) => null,
       );
 
   final SocialShareWidget socialShareWidget;
@@ -55,6 +59,15 @@ class SocialShare extends StatefulWidget {
   final bool isEdit;
   final bool asIcon;
   final Function(SocialAccount) onChanged;
+  final Future<void> Function(String url) onTap;
+
+  static Future<void> _launchUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw LaunchAppException(url);
+    }
+  }
 
   @override
   SocialShareState createState() => SocialShareState(initialSocialAccount);
@@ -63,29 +76,35 @@ class SocialShare extends StatefulWidget {
 class SocialShareState extends State<SocialShare> {
   SocialShareState(this.socialAccount)
       : controller = TextEditingController(text: socialAccount.identifier),
+        switchController = AdvancedSwitchController(true),
         super();
   SocialAccount socialAccount;
-  bool isPublic = true;
   TextEditingController controller;
+  final AdvancedSwitchController switchController;
 
   double get radius => 20;
 
+  @override
+  void initState() {
+    /// everytime the switch changes, call [setSocialAccountVisibility]
+    switchController.addListener(() {
+      setSocialAccountVisibility(switchController.value);
+    });
+    super.initState();
+  }
+
   /// sets the [socialAccount]s [SocialAccountVisibility] and calls [widget.onChanged]
   void setSocialAccountVisibility(bool isPublic) {
-    final SocialAccountVisibility visibility = isPublic
-        ? SocialAccountVisibility.public()
-        : SocialAccountVisibility.onRequest();
-
     setState(() {
-      this.isPublic = isPublic;
-      socialAccount = socialAccount.copyWith(visibility: visibility);
+      this.switchController.value = isPublic;
+      socialAccount = socialAccount.copyWith(isPublic: isPublic);
     });
     widget.onChanged(socialAccount);
   }
 
   Widget _buildTextFormField(BuildContext context) {
     return InkWell(
-        onTap: () => _launchUrl(),
+        onTap: () => widget.onTap(socialAccount.link),
         child: TextFormField(
             controller: controller,
             enabled: widget.isEdit,
@@ -112,21 +131,11 @@ class SocialShareState extends State<SocialShare> {
             }));
   }
 
-  Future<void> _launchUrl() async {
-    final url = socialAccount.link;
-
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw LaunchAppException(url);
-    }
-  }
-
   Widget _buildSwitch(BuildContext context) {
     return Tooltip(
-        message: isPublic ? 'Public' : 'on Request',
+        message: switchController.value ? 'Public' : 'on Request',
         child: AdvancedSwitch(
-          value: isPublic,
+          controller: switchController,
           borderRadius: BorderRadius.all(const Radius.circular(5)),
           activeChild: Icon(
             FontAwesomeIcons.users,
@@ -138,7 +147,6 @@ class SocialShareState extends State<SocialShare> {
             color: Theme.of(context).accentColor,
           ),
           inactiveColor: Theme.of(context).dividerColor,
-          onChanged: (value) => setSocialAccountVisibility(value),
           width: 70,
         ));
   }
@@ -166,7 +174,7 @@ class SocialShareState extends State<SocialShare> {
             child: Tooltip(
                 message: socialAccount.name,
                 child: InkWell(
-                  onTap: () => _launchUrl(),
+                  onTap: () => widget.onTap(socialAccount.link),
                   child: socialAccount.icon,
                 ))));
   }
