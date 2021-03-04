@@ -18,14 +18,12 @@ class _$SocialAccountTearOff {
       {@required Icon icon,
       @required String name,
       @required String Function(String) prelink,
-      @required String identifier,
-      @required bool isPublic}) {
+      @required String identifier}) {
     return _MessengerAccount(
       icon: icon,
       name: name,
       prelink: prelink,
       identifier: identifier,
-      isPublic: isPublic,
     );
   }
 }
@@ -40,7 +38,6 @@ mixin _$SocialAccount {
   String get name;
   String Function(String) get prelink;
   String get identifier;
-  bool get isPublic;
 
   @JsonKey(ignore: true)
   $SocialAccountCopyWith<SocialAccount> get copyWith;
@@ -55,8 +52,7 @@ abstract class $SocialAccountCopyWith<$Res> {
       {Icon icon,
       String name,
       String Function(String) prelink,
-      String identifier,
-      bool isPublic});
+      String identifier});
 }
 
 /// @nodoc
@@ -74,7 +70,6 @@ class _$SocialAccountCopyWithImpl<$Res>
     Object name = freezed,
     Object prelink = freezed,
     Object identifier = freezed,
-    Object isPublic = freezed,
   }) {
     return _then(_value.copyWith(
       icon: icon == freezed ? _value.icon : icon as Icon,
@@ -84,7 +79,6 @@ class _$SocialAccountCopyWithImpl<$Res>
           : prelink as String Function(String),
       identifier:
           identifier == freezed ? _value.identifier : identifier as String,
-      isPublic: isPublic == freezed ? _value.isPublic : isPublic as bool,
     ));
   }
 }
@@ -100,8 +94,7 @@ abstract class _$MessengerAccountCopyWith<$Res>
       {Icon icon,
       String name,
       String Function(String) prelink,
-      String identifier,
-      bool isPublic});
+      String identifier});
 }
 
 /// @nodoc
@@ -121,7 +114,6 @@ class __$MessengerAccountCopyWithImpl<$Res>
     Object name = freezed,
     Object prelink = freezed,
     Object identifier = freezed,
-    Object isPublic = freezed,
   }) {
     return _then(_MessengerAccount(
       icon: icon == freezed ? _value.icon : icon as Icon,
@@ -131,7 +123,6 @@ class __$MessengerAccountCopyWithImpl<$Res>
           : prelink as String Function(String),
       identifier:
           identifier == freezed ? _value.identifier : identifier as String,
-      isPublic: isPublic == freezed ? _value.isPublic : isPublic as bool,
     ));
   }
 }
@@ -142,13 +133,11 @@ class _$_MessengerAccount implements _MessengerAccount {
       {@required this.icon,
       @required this.name,
       @required this.prelink,
-      @required this.identifier,
-      @required this.isPublic})
+      @required this.identifier})
       : assert(icon != null),
         assert(name != null),
         assert(prelink != null),
-        assert(identifier != null),
-        assert(isPublic != null);
+        assert(identifier != null);
 
   @override
   final Icon icon;
@@ -158,8 +147,6 @@ class _$_MessengerAccount implements _MessengerAccount {
   final String Function(String) prelink;
   @override
   final String identifier;
-  @override
-  final bool isPublic;
 
   bool _didlink = false;
   String _link;
@@ -175,7 +162,7 @@ class _$_MessengerAccount implements _MessengerAccount {
 
   @override
   String toString() {
-    return 'SocialAccount._(icon: $icon, name: $name, prelink: $prelink, identifier: $identifier, isPublic: $isPublic, link: $link)';
+    return 'SocialAccount._(icon: $icon, name: $name, prelink: $prelink, identifier: $identifier, link: $link)';
   }
 
   @override
@@ -191,10 +178,7 @@ class _$_MessengerAccount implements _MessengerAccount {
                     .equals(other.prelink, prelink)) &&
             (identical(other.identifier, identifier) ||
                 const DeepCollectionEquality()
-                    .equals(other.identifier, identifier)) &&
-            (identical(other.isPublic, isPublic) ||
-                const DeepCollectionEquality()
-                    .equals(other.isPublic, isPublic)));
+                    .equals(other.identifier, identifier)));
   }
 
   @override
@@ -203,8 +187,7 @@ class _$_MessengerAccount implements _MessengerAccount {
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(prelink) ^
-      const DeepCollectionEquality().hash(identifier) ^
-      const DeepCollectionEquality().hash(isPublic);
+      const DeepCollectionEquality().hash(identifier);
 
   @JsonKey(ignore: true)
   @override
@@ -217,8 +200,7 @@ abstract class _MessengerAccount implements SocialAccount {
       {@required Icon icon,
       @required String name,
       @required String Function(String) prelink,
-      @required String identifier,
-      @required bool isPublic}) = _$_MessengerAccount;
+      @required String identifier}) = _$_MessengerAccount;
 
   @override
   Icon get icon;
@@ -228,8 +210,6 @@ abstract class _MessengerAccount implements SocialAccount {
   String Function(String) get prelink;
   @override
   String get identifier;
-  @override
-  bool get isPublic;
   @override
   @JsonKey(ignore: true)
   _$MessengerAccountCopyWith<_MessengerAccount> get copyWith;

@@ -23,7 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_hooks: ^0.15.0
+  flutter_hooks: ^0.16.0
   social_connect: 
     path: ../
 

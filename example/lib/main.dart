@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:social_connect/domain/value_objects.dart';
+import 'package:social_connect/domain/social_account.dart';
 import 'package:social_connect/views/social_connect.dart';
 
 void main() {
@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
                     itemCount: socialAccountsAll.length,
                     itemBuilder: (context, idx) {
                       return SocialShare.show(
-                        socialAccount: socialAccountsAll[idx],
+                        socialAccount:
+                            socialAccountsAll.values.toList()[idx](''),
                         dense: true,
                       );
                     })),
@@ -56,7 +57,7 @@ class MessengerShare extends HookWidget {
 
     final editWidget = SocialShare.edit(
       socialAccount: acc.value,
-      onChanged: (newAcc) {
+      onTextChanged: (newAcc) {
         debugPrint(newAcc.toString());
         acc.value = newAcc;
       },
@@ -73,8 +74,9 @@ class MessengerShare extends HookWidget {
     return Container(
         child: ListView(
       shrinkWrap: true,
-      children: socialAccountsAll
-          .map((e) => _buildMessengerField(context, e))
+      children: socialAccountsAll.values
+          .toList()
+          .map((e) => _buildMessengerField(context, e('')))
           .toList(),
     ));
   }

@@ -13,7 +13,6 @@ abstract class SocialAccount with _$SocialAccount {
     @required String name,
     @required String Function(String) prelink,
     @required String identifier,
-    @required bool isPublic,
   }) = _MessengerAccount;
 
   @late
@@ -26,7 +25,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Email',
         identifier: emailAddress,
         prelink: (String emailAddress) => 'mailto:$emailAddress',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.phone(String number,
@@ -36,19 +34,17 @@ abstract class SocialAccount with _$SocialAccount {
         name: '#',
         identifier: number,
         prelink: (String number) => 'tel:$number',
-        isPublic: isPublic ?? true,
       );
 
-  factory SocialAccount.whatsapp(int number,
+  factory SocialAccount.whatsapp(String number,
           {Color iconColor, bool isPublic}) =>
       SocialAccount._(
         icon: Icon(SimpleIcons.whatsapp,
             color: iconColor ?? const Color(0xFF25D366)),
         name: 'WhatsApp',
-        identifier: number?.toString() ?? '',
+        identifier: number,
         prelink: (String number) =>
             'https://wa.me/$number', //https://wa.me/49xxxxxxxxxxx
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.telegram(String username,
@@ -59,7 +55,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Telegram',
         identifier: username,
         prelink: (String username) => 'https://t.me/$username',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.facebook(String username,
@@ -70,7 +65,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Facebook',
         identifier: username,
         prelink: (String username) => 'https://www.facebook.com/$username',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.discord(String userid,
@@ -81,7 +75,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Discord',
         identifier: userid,
         prelink: (String userid) => 'https://discordapp.com/users/$userid',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.instagram(String username,
@@ -92,7 +85,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Instagram',
         identifier: username,
         prelink: (String username) => 'https://www.instagram.com/$username',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.tiktok(String username,
@@ -103,7 +95,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Tik Tok',
         identifier: username,
         prelink: (String username) => 'https://www.tiktok.com/@$username',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.snapchat(String username,
@@ -114,7 +105,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Snapchat',
         identifier: username,
         prelink: (String username) => 'https://www.snapchat.com/add/$username',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.skype(String username,
@@ -125,7 +115,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Skype',
         identifier: username,
         prelink: (String username) => '', //TODO(jr): to be found out
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.viber(String number,
@@ -137,7 +126,6 @@ abstract class SocialAccount with _$SocialAccount {
         identifier: number,
         prelink: (String number) =>
             'viber://chat?number=$number', //! will not work in browser
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.twitter(String username,
@@ -148,7 +136,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Twitter',
         identifier: username,
         prelink: (String username) => 'https://twitter.com/$username',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.linkedin(String userid,
@@ -159,7 +146,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Linkedin',
         identifier: userid,
         prelink: (String userid) => 'https://linkedin.com/in/$userid',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.xing(String username,
@@ -170,7 +156,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Xing',
         identifier: username,
         prelink: (String username) => 'https://www.xing.com/profile/$username',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.tumblr(String username,
@@ -181,7 +166,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Tumblr',
         identifier: username,
         prelink: (String username) => 'https://$username.tumblr.com/ask',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.wechat(String username,
@@ -192,7 +176,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'WeChat',
         identifier: username,
         prelink: (String username) => '', //TODO(jr): to be found out
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.sinaweibo(String userid,
@@ -203,7 +186,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Sina Weibo',
         identifier: userid,
         prelink: (String userid) => 'https://weibo.com/u/$userid',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.line(String lineId, {Color iconColor, bool isPublic}) =>
@@ -213,7 +195,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Line',
         identifier: lineId,
         prelink: (String lineId) => 'https://line.me/R/ti/p/$lineId',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.threema(String username,
@@ -224,7 +205,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Threema',
         identifier: username,
         prelink: (String username) => 'https://threema.id/$username?text=',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.element(String username,
@@ -235,7 +215,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Element',
         identifier: username,
         prelink: (String username) => '', //TODO(jr): to be found out
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.reddit(String username,
@@ -246,7 +225,6 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Reddit',
         identifier: username,
         prelink: (String username) => 'https://www.reddit.com/user/$username',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.tinder(String username,
@@ -257,53 +235,52 @@ abstract class SocialAccount with _$SocialAccount {
         name: 'Tinder',
         identifier: username,
         prelink: (String username) => 'https://www.gotinder.com/@$username',
-        isPublic: isPublic ?? true,
       );
 
   factory SocialAccount.icq(String icqNumber,
           {Color iconColor, bool isPublic}) =>
       SocialAccount._(
-          icon: Icon(SimpleIcons.icq,
-              color: iconColor ?? const Color(0xFF24FF00)),
-          name: 'ICQ',
-          identifier: icqNumber,
-          prelink: (String icqNummer) => 'https://icq.im/$icqNummer',
-          isPublic: isPublic ?? true);
+        icon:
+            Icon(SimpleIcons.icq, color: iconColor ?? const Color(0xFF24FF00)),
+        name: 'ICQ',
+        identifier: icqNumber,
+        prelink: (String icqNummer) => 'https://icq.im/$icqNummer',
+      );
 
   factory SocialAccount.imgur(String username,
           {Color iconColor, bool isPublic}) =>
       SocialAccount._(
-          icon: Icon(SimpleIcons.imgur,
-              color: iconColor ?? const Color(0xFF1BB76E)),
-          name: 'imgur',
-          identifier: username,
-          prelink: (String username) => 'https://imgur.com/user/$username',
-          isPublic: isPublic ?? true);
+        icon: Icon(SimpleIcons.imgur,
+            color: iconColor ?? const Color(0xFF1BB76E)),
+        name: 'imgur',
+        identifier: username,
+        prelink: (String username) => 'https://imgur.com/user/$username',
+      );
 }
 
-final socialAccountsAll = <SocialAccount>[
-  SocialAccount.discord(''),
-  SocialAccount.element(''),
-  SocialAccount.email(''),
-  SocialAccount.facebook(''),
-  SocialAccount.icq(''),
-  SocialAccount.imgur(''),
-  SocialAccount.instagram(''),
-  SocialAccount.line(''),
-  SocialAccount.linkedin(''),
-  SocialAccount.phone(''),
-  SocialAccount.reddit(''),
-  SocialAccount.sinaweibo(''),
-  SocialAccount.skype(''),
-  SocialAccount.snapchat(''),
-  SocialAccount.telegram(''),
-  SocialAccount.threema(''),
-  SocialAccount.tiktok(''),
-  SocialAccount.tinder(''),
-  SocialAccount.tumblr(''),
-  SocialAccount.twitter(''),
-  SocialAccount.viber(''),
-  SocialAccount.wechat(''),
-  SocialAccount.whatsapp(null),
-  SocialAccount.xing(''),
-];
+final socialAccountsAll = <String, SocialAccount Function(String)>{
+  'discord': (String identifier) => SocialAccount.discord(identifier),
+  'element': (String identifier) => SocialAccount.element(identifier),
+  'email': (String identifier) => SocialAccount.email(identifier),
+  'facebook': (String identifier) => SocialAccount.facebook(identifier),
+  'icq': (String identifier) => SocialAccount.icq(identifier),
+  'imgur': (String identifier) => SocialAccount.imgur(identifier),
+  'instagram': (String identifier) => SocialAccount.instagram(identifier),
+  'line': (String identifier) => SocialAccount.line(identifier),
+  'linkedin': (String identifier) => SocialAccount.linkedin(identifier),
+  'phone': (String identifier) => SocialAccount.phone(identifier),
+  'reddit': (String identifier) => SocialAccount.reddit(identifier),
+  'sinaweibo': (String identifier) => SocialAccount.sinaweibo(identifier),
+  'skype': (String identifier) => SocialAccount.skype(identifier),
+  'snapchat': (String identifier) => SocialAccount.snapchat(identifier),
+  'telegram': (String identifier) => SocialAccount.telegram(identifier),
+  'threema': (String identifier) => SocialAccount.threema(identifier),
+  'tiktok': (String identifier) => SocialAccount.tiktok(identifier),
+  'tinder': (String identifier) => SocialAccount.tinder(identifier),
+  'tumblr': (String identifier) => SocialAccount.tumblr(identifier),
+  'twitter': (String identifier) => SocialAccount.twitter(identifier),
+  'viber': (String identifier) => SocialAccount.viber(identifier),
+  'wechat': (String identifier) => SocialAccount.wechat(identifier),
+  'whatsapp': (String identifier) => SocialAccount.whatsapp(identifier),
+  'xing': (String identifier) => SocialAccount.xing(identifier),
+};

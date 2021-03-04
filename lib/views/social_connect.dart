@@ -18,6 +18,7 @@ class SocialShare extends StatefulWidget {
     @required this.initialSocialAccount,
     this.isEdit = false,
     @required this.onChanged,
+    @required this.onSwitchChanged,
     @required this.onTap,
     this.asIcon,
   }) : super(key: key);
@@ -37,20 +38,24 @@ class SocialShare extends StatefulWidget {
         isEdit: false,
         asIcon: dense,
         onChanged: (_) => null,
+        onSwitchChanged: (_) => null,
         onTap: onTap,
       );
 
-  factory SocialShare.edit(
-          {Key key,
-          @required SocialAccount socialAccount,
-          @required Function(SocialAccount) onChanged}) =>
+  factory SocialShare.edit({
+    Key key,
+    @required SocialAccount socialAccount,
+    Function(SocialAccount) onTextChanged,
+    Function(bool) onSwitchChanged,
+  }) =>
       SocialShare(
         key: key,
         initialSocialAccount: socialAccount,
         socialShareWidget: SocialShareWidget.edit(),
         isEdit: true,
         asIcon: false,
-        onChanged: onChanged,
+        onChanged: onTextChanged ?? (_) => null,
+        onSwitchChanged: onSwitchChanged ?? (_) => null,
         onTap: (_) => null,
       );
 
@@ -59,6 +64,7 @@ class SocialShare extends StatefulWidget {
   final bool isEdit;
   final bool asIcon;
   final Function(SocialAccount) onChanged;
+  final Function(bool) onSwitchChanged;
   final Future<void> Function(String url) onTap;
 
   static Future<void> _launchUrl(String url) async {
@@ -88,18 +94,9 @@ class SocialShareState extends State<SocialShare> {
   void initState() {
     /// everytime the switch changes, call [setSocialAccountVisibility]
     switchController.addListener(() {
-      setSocialAccountVisibility(switchController.value);
+      widget.onSwitchChanged(switchController.value);
     });
     super.initState();
-  }
-
-  /// sets the [socialAccount]s [SocialAccountVisibility] and calls [widget.onChanged]
-  void setSocialAccountVisibility(bool isPublic) {
-    setState(() {
-      this.switchController.value = isPublic;
-      socialAccount = socialAccount.copyWith(isPublic: isPublic);
-    });
-    widget.onChanged(socialAccount);
   }
 
   Widget _buildTextFormField(BuildContext context) {
