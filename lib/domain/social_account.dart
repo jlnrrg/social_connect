@@ -31,7 +31,7 @@ abstract class SocialAccount with _$SocialAccount {
           {Color iconColor, bool isPublic}) =>
       SocialAccount._(
         icon: Icon(FontAwesomeIcons.phone, color: iconColor),
-        name: '#',
+        name: 'Phone',
         identifier: number,
         prelink: (String number) => 'tel:$number',
       );

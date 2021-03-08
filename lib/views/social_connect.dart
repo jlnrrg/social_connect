@@ -27,16 +27,16 @@ class SocialShare extends StatefulWidget {
     Key key,
 
     /// shows the widget in a IconButton format
-    bool dense = false,
+    bool asIcon = false,
     @required SocialAccount socialAccount,
-    Future<void> Function(String url) onTap = _launchUrl,
+    Future<void> Function(String url) onTap,
   }) =>
       SocialShare(
         key: key,
         initialSocialAccount: socialAccount,
         socialShareWidget: SocialShareWidget.show(),
         isEdit: false,
-        asIcon: dense,
+        asIcon: asIcon,
         onChanged: (_) => null,
         onSwitchChanged: (_) => null,
         onTap: onTap,
@@ -56,7 +56,7 @@ class SocialShare extends StatefulWidget {
         asIcon: false,
         onChanged: onTextChanged ?? (_) => null,
         onSwitchChanged: onSwitchChanged ?? (_) => null,
-        onTap: (_) => null,
+        onTap: null,
       );
 
   final SocialShareWidget socialShareWidget;
@@ -66,14 +66,6 @@ class SocialShare extends StatefulWidget {
   final Function(SocialAccount) onChanged;
   final Function(bool) onSwitchChanged;
   final Future<void> Function(String url) onTap;
-
-  static Future<void> _launchUrl(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw LaunchAppException(url);
-    }
-  }
 
   @override
   SocialShareState createState() => SocialShareState(initialSocialAccount);
@@ -100,8 +92,19 @@ class SocialShareState extends State<SocialShare> {
   }
 
   Widget _buildTextFormField(BuildContext context) {
-    return InkWell(
-        onTap: () => widget.onTap(socialAccount.link),
+    // if onTap is null then no InkWell
+    Widget inkWell(
+        {Future<void> Function(String url) onTap, @required Widget child}) {
+      return onTap != null
+          ? InkWell(
+              onTap: () => widget.onTap(socialAccount.link),
+              child: child,
+            )
+          : child;
+    }
+
+    return inkWell(
+        onTap: widget.onTap,
         child: TextFormField(
             controller: controller,
             enabled: widget.isEdit,

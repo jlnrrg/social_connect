@@ -16,28 +16,29 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
+            backgroundColor: Colors.blue,
             body: SafeArea(
                 child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: 35.0,
-                  maxHeight: 50.0,
-                ),
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: socialAccountsAll.length,
-                    itemBuilder: (context, idx) {
-                      return SocialShare.show(
-                        socialAccount:
-                            socialAccountsAll.values.toList()[idx](''),
-                        dense: true,
-                      );
-                    })),
-            Expanded(child: MessengerShare())
-          ],
-        ))));
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: 35.0,
+                      maxHeight: 50.0,
+                    ),
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: socialAccountsAll.length,
+                        itemBuilder: (context, idx) {
+                          return SocialShare.show(
+                            socialAccount:
+                                socialAccountsAll.values.toList()[idx](''),
+                            asIcon: true,
+                          );
+                        })),
+                Expanded(child: MessengerShare())
+              ],
+            ))));
   }
 }
 
@@ -65,7 +66,11 @@ class MessengerShare extends HookWidget {
 
     return Column(children: <Widget>[
       editWidget,
-      showWidget,
+      CheckboxListTile(
+        value: false,
+        onChanged: (_) => null,
+        title: showWidget,
+      )
     ]);
   }
 
