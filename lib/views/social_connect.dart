@@ -2,12 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:social_connect/domain/core/exceptions.dart';
 import 'package:social_connect/domain/social_account.dart';
 import 'package:social_connect/domain/value_unions.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 /// [SocialShare.show] allows the user on tap to be forwarded to the according app or link in the web browser.
 /// it is best to catch for [LaunchAppException]
@@ -18,7 +15,6 @@ class SocialShare extends StatefulWidget {
     @required this.initialSocialAccount,
     this.isEdit = false,
     @required this.onChanged,
-    @required this.onSwitchChanged,
     @required this.onTap,
     this.asIcon,
   }) : super(key: key);
@@ -38,7 +34,6 @@ class SocialShare extends StatefulWidget {
         isEdit: false,
         asIcon: asIcon,
         onChanged: (_) => null,
-        onSwitchChanged: (_) => null,
         onTap: onTap,
       );
 
@@ -46,7 +41,6 @@ class SocialShare extends StatefulWidget {
     Key key,
     @required SocialAccount socialAccount,
     Function(SocialAccount) onTextChanged,
-    Function(bool) onSwitchChanged,
   }) =>
       SocialShare(
         key: key,
@@ -55,8 +49,7 @@ class SocialShare extends StatefulWidget {
         isEdit: true,
         asIcon: false,
         onChanged: onTextChanged ?? (_) => null,
-        onSwitchChanged: onSwitchChanged ?? (_) => null,
-        onTap: null,
+        onTap: (_) => null,
       );
 
   final SocialShareWidget socialShareWidget;
@@ -64,7 +57,6 @@ class SocialShare extends StatefulWidget {
   final bool isEdit;
   final bool asIcon;
   final Function(SocialAccount) onChanged;
-  final Function(bool) onSwitchChanged;
   final Future<void> Function(String url) onTap;
 
   @override
@@ -74,28 +66,17 @@ class SocialShare extends StatefulWidget {
 class SocialShareState extends State<SocialShare> {
   SocialShareState(this.socialAccount)
       : controller = TextEditingController(text: socialAccount.identifier),
-        switchController = AdvancedSwitchController(true),
         super();
   SocialAccount socialAccount;
   TextEditingController controller;
-  final AdvancedSwitchController switchController;
 
   double get radius => 20;
-
-  @override
-  void initState() {
-    /// everytime the switch changes, call [setSocialAccountVisibility]
-    switchController.addListener(() {
-      widget.onSwitchChanged(switchController.value);
-    });
-    super.initState();
-  }
 
   Widget _buildTextFormField(BuildContext context) {
     // if onTap is null then no InkWell
     Widget inkWell(
         {Future<void> Function(String url) onTap, @required Widget child}) {
-      return onTap != null
+      return onTap != null && onTap != ((_) => null)
           ? InkWell(
               onTap: () => widget.onTap(socialAccount.link),
               child: child,
@@ -113,6 +94,7 @@ class SocialShareState extends State<SocialShare> {
                 prefixIcon: socialAccount.icon,
                 labelText: socialAccount.name,
                 isDense: true,
+                filled: false,
                 contentPadding: EdgeInsets.zero,
                 disabledBorder: InputBorder.none
                 // hintText: 'hint',
@@ -129,39 +111,6 @@ class SocialShareState extends State<SocialShare> {
               });
               widget.onChanged(socialAccount);
             }));
-  }
-
-  Widget _buildSwitch(BuildContext context) {
-    return Tooltip(
-        message: switchController.value ? 'Public' : 'on Request',
-        child: AdvancedSwitch(
-          controller: switchController,
-          borderRadius: BorderRadius.all(const Radius.circular(5)),
-          activeChild: Icon(
-            FontAwesomeIcons.users,
-            color: Theme.of(context).accentColor,
-          ),
-          activeColor: Theme.of(context).dividerColor,
-          inactiveChild: Icon(
-            FontAwesomeIcons.usersSlash,
-            color: Theme.of(context).accentColor,
-          ),
-          inactiveColor: Theme.of(context).dividerColor,
-          width: 70,
-        ));
-  }
-
-  Widget _buildRow(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Flexible(child: _buildTextFormField(context)),
-        if (widget.isEdit)
-          Padding(
-              padding: EdgeInsets.only(left: 10), child: _buildSwitch(context))
-      ],
-    );
   }
 
   Widget _buildIcon(BuildContext context) {
@@ -181,12 +130,7 @@ class SocialShareState extends State<SocialShare> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.asIcon ? _buildIcon(context) : _buildRow(context);
-  }
-
-  void dispose() {
-    controller.dispose();
-    super.dispose();
+    return widget.asIcon ? _buildIcon(context) : _buildTextFormField(context);
   }
 }
 

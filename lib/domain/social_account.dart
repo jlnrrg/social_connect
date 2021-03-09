@@ -2,25 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:simple_icons/simple_icons.dart';
-import 'package:social_connect/domain/value_unions.dart';
 
 part 'social_account.freezed.dart';
 
 @freezed
-abstract class SocialAccount with _$SocialAccount {
-  factory SocialAccount._({
+abstract class SocialAccount
+    implements _$SocialAccount, Comparable<SocialAccount> {
+  factory SocialAccount._default({
     @required Icon icon,
     @required String name,
     @required String Function(String) prelink,
     @required String identifier,
-  }) = _MessengerAccount;
+  }) = _SocialAccount;
 
   @late
   String get link => prelink(identifier);
 
+  SocialAccount._();
+
   factory SocialAccount.email(String emailAddress,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(FontAwesomeIcons.envelope, color: iconColor),
         name: 'Email',
         identifier: emailAddress,
@@ -29,7 +31,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.phone(String number,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(FontAwesomeIcons.phone, color: iconColor),
         name: 'Phone',
         identifier: number,
@@ -38,7 +40,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.whatsapp(String number,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.whatsapp,
             color: iconColor ?? const Color(0xFF25D366)),
         name: 'WhatsApp',
@@ -49,7 +51,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.telegram(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.telegram,
             color: iconColor ?? const Color(0xFF0088cc)),
         name: 'Telegram',
@@ -59,7 +61,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.facebook(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.facebook,
             color: iconColor ?? const Color(0xFF4267B2)),
         name: 'Facebook',
@@ -69,7 +71,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.discord(String userid,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.discord,
             color: iconColor ?? const Color(0xFF7289da)),
         name: 'Discord',
@@ -79,7 +81,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.instagram(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.instagram,
             color: iconColor ?? const Color(0xFFE4405F)),
         name: 'Instagram',
@@ -89,7 +91,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.tiktok(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.tiktok,
             color: iconColor ?? const Color(0xFF000000)),
         name: 'Tik Tok',
@@ -99,7 +101,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.snapchat(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.snapchat,
             color: iconColor ?? const Color(0xFFFFFC00)),
         name: 'Snapchat',
@@ -109,7 +111,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.skype(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.skype,
             color: iconColor ?? const Color(0xFF00aff0)),
         name: 'Skype',
@@ -119,7 +121,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.viber(String number,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.viber,
             color: iconColor ?? const Color(0xFF665CAC)),
         name: 'Viber',
@@ -130,7 +132,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.twitter(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.twitter,
             color: iconColor ?? const Color(0xFF1DA1F2)),
         name: 'Twitter',
@@ -140,7 +142,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.linkedin(String userid,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.linkedin,
             color: iconColor ?? const Color(0xFF0072b1)),
         name: 'Linkedin',
@@ -150,7 +152,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.xing(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon:
             Icon(SimpleIcons.xing, color: iconColor ?? const Color(0xFF006567)),
         name: 'Xing',
@@ -160,7 +162,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.tumblr(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.tumblr,
             color: iconColor ?? const Color(0xFF34526f)),
         name: 'Tumblr',
@@ -170,7 +172,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.wechat(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.wechat,
             color: iconColor ?? const Color(0xFF9de60b)),
         name: 'WeChat',
@@ -180,7 +182,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.sinaweibo(String userid,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.sinaweibo,
             color: iconColor ?? const Color(0xFFdf2029)),
         name: 'Sina Weibo',
@@ -189,7 +191,7 @@ abstract class SocialAccount with _$SocialAccount {
       );
 
   factory SocialAccount.line(String lineId, {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon:
             Icon(SimpleIcons.line, color: iconColor ?? const Color(0xFF00b900)),
         name: 'Line',
@@ -199,7 +201,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.threema(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.threema,
             color: iconColor ?? const Color(0xFF000000)),
         name: 'Threema',
@@ -209,7 +211,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.element(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.element,
             color: iconColor ?? const Color(0xFF0DBD8B)),
         name: 'Element',
@@ -219,7 +221,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.reddit(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.reddit,
             color: iconColor ?? const Color(0xFFff4500)),
         name: 'Reddit',
@@ -229,7 +231,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.tinder(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.tinder,
             color: iconColor ?? const Color(0xFFfe3c72)),
         name: 'Tinder',
@@ -239,7 +241,7 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.icq(String icqNumber,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon:
             Icon(SimpleIcons.icq, color: iconColor ?? const Color(0xFF24FF00)),
         name: 'ICQ',
@@ -249,13 +251,28 @@ abstract class SocialAccount with _$SocialAccount {
 
   factory SocialAccount.imgur(String username,
           {Color iconColor, bool isPublic}) =>
-      SocialAccount._(
+      SocialAccount._default(
         icon: Icon(SimpleIcons.imgur,
             color: iconColor ?? const Color(0xFF1BB76E)),
         name: 'imgur',
         identifier: username,
         prelink: (String username) => 'https://imgur.com/user/$username',
       );
+
+  @override
+  int compareTo(SocialAccount socialAccount) {
+    final String thisName = name.toLowerCase();
+    final String otherName = socialAccount.name.toLowerCase();
+
+    // pushes null values to the front of the list
+    return thisName == null
+        ? otherName == null
+            ? 0
+            : 1
+        : otherName == null
+            ? -1
+            : thisName.compareTo(otherName);
+  }
 }
 
 final socialAccountsAll = <String, SocialAccount Function(String)>{

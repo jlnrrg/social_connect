@@ -14,12 +14,12 @@ class _$SocialAccountTearOff {
   const _$SocialAccountTearOff();
 
 // ignore: unused_element
-  _MessengerAccount _(
+  _SocialAccount _default(
       {@required Icon icon,
       @required String name,
       @required String Function(String) prelink,
       @required String identifier}) {
-    return _MessengerAccount(
+    return _SocialAccount(
       icon: icon,
       name: name,
       prelink: prelink,
@@ -84,11 +84,11 @@ class _$SocialAccountCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$MessengerAccountCopyWith<$Res>
+abstract class _$SocialAccountCopyWith<$Res>
     implements $SocialAccountCopyWith<$Res> {
-  factory _$MessengerAccountCopyWith(
-          _MessengerAccount value, $Res Function(_MessengerAccount) then) =
-      __$MessengerAccountCopyWithImpl<$Res>;
+  factory _$SocialAccountCopyWith(
+          _SocialAccount value, $Res Function(_SocialAccount) then) =
+      __$SocialAccountCopyWithImpl<$Res>;
   @override
   $Res call(
       {Icon icon,
@@ -98,15 +98,15 @@ abstract class _$MessengerAccountCopyWith<$Res>
 }
 
 /// @nodoc
-class __$MessengerAccountCopyWithImpl<$Res>
+class __$SocialAccountCopyWithImpl<$Res>
     extends _$SocialAccountCopyWithImpl<$Res>
-    implements _$MessengerAccountCopyWith<$Res> {
-  __$MessengerAccountCopyWithImpl(
-      _MessengerAccount _value, $Res Function(_MessengerAccount) _then)
-      : super(_value, (v) => _then(v as _MessengerAccount));
+    implements _$SocialAccountCopyWith<$Res> {
+  __$SocialAccountCopyWithImpl(
+      _SocialAccount _value, $Res Function(_SocialAccount) _then)
+      : super(_value, (v) => _then(v as _SocialAccount));
 
   @override
-  _MessengerAccount get _value => super._value as _MessengerAccount;
+  _SocialAccount get _value => super._value as _SocialAccount;
 
   @override
   $Res call({
@@ -115,7 +115,7 @@ class __$MessengerAccountCopyWithImpl<$Res>
     Object prelink = freezed,
     Object identifier = freezed,
   }) {
-    return _then(_MessengerAccount(
+    return _then(_SocialAccount(
       icon: icon == freezed ? _value.icon : icon as Icon,
       name: name == freezed ? _value.name : name as String,
       prelink: prelink == freezed
@@ -128,8 +128,8 @@ class __$MessengerAccountCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_MessengerAccount implements _MessengerAccount {
-  _$_MessengerAccount(
+class _$_SocialAccount extends _SocialAccount {
+  _$_SocialAccount(
       {@required this.icon,
       @required this.name,
       @required this.prelink,
@@ -137,7 +137,8 @@ class _$_MessengerAccount implements _MessengerAccount {
       : assert(icon != null),
         assert(name != null),
         assert(prelink != null),
-        assert(identifier != null);
+        assert(identifier != null),
+        super._();
 
   @override
   final Icon icon;
@@ -162,13 +163,13 @@ class _$_MessengerAccount implements _MessengerAccount {
 
   @override
   String toString() {
-    return 'SocialAccount._(icon: $icon, name: $name, prelink: $prelink, identifier: $identifier, link: $link)';
+    return 'SocialAccount._default(icon: $icon, name: $name, prelink: $prelink, identifier: $identifier, link: $link)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _MessengerAccount &&
+        (other is _SocialAccount &&
             (identical(other.icon, icon) ||
                 const DeepCollectionEquality().equals(other.icon, icon)) &&
             (identical(other.name, name) ||
@@ -191,16 +192,17 @@ class _$_MessengerAccount implements _MessengerAccount {
 
   @JsonKey(ignore: true)
   @override
-  _$MessengerAccountCopyWith<_MessengerAccount> get copyWith =>
-      __$MessengerAccountCopyWithImpl<_MessengerAccount>(this, _$identity);
+  _$SocialAccountCopyWith<_SocialAccount> get copyWith =>
+      __$SocialAccountCopyWithImpl<_SocialAccount>(this, _$identity);
 }
 
-abstract class _MessengerAccount implements SocialAccount {
-  factory _MessengerAccount(
+abstract class _SocialAccount extends SocialAccount {
+  _SocialAccount._() : super._();
+  factory _SocialAccount(
       {@required Icon icon,
       @required String name,
       @required String Function(String) prelink,
-      @required String identifier}) = _$_MessengerAccount;
+      @required String identifier}) = _$_SocialAccount;
 
   @override
   Icon get icon;
@@ -212,5 +214,5 @@ abstract class _MessengerAccount implements SocialAccount {
   String get identifier;
   @override
   @JsonKey(ignore: true)
-  _$MessengerAccountCopyWith<_MessengerAccount> get copyWith;
+  _$SocialAccountCopyWith<_SocialAccount> get copyWith;
 }
