@@ -57,6 +57,7 @@ class MessengerShare extends HookWidget {
         key: Key('show:' + acc.value.identifier), socialAccount: acc.value);
 
     final editWidget = SocialShare.edit(
+      key: Key('edit:' + acc.value.identifier),
       socialAccount: acc.value,
       onTextChanged: (newAcc) {
         debugPrint(newAcc.toString());

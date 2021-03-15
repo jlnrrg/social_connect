@@ -93,6 +93,9 @@ class SocialShareState extends State<SocialShare> {
             decoration: InputDecoration(
                 prefixIcon: socialAccount.icon,
                 labelText: socialAccount.name,
+                labelStyle: widget.isEdit
+                    ? null
+                    : Theme.of(context).textTheme.subtitle1,
                 isDense: true,
                 filled: false,
                 contentPadding: EdgeInsets.zero,
