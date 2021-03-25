@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MessengerShare extends HookWidget {
-  MessengerShare({Key key}) : super(key: key);
+  MessengerShare({Key? key}) : super(key: key);
 
   Widget _buildMessengerField(
       BuildContext context, SocialAccount socialAccount) {

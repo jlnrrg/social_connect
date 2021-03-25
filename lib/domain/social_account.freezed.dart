@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'social_account.dart';
 
@@ -9,16 +9,18 @@ part of 'social_account.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$SocialAccountTearOff {
   const _$SocialAccountTearOff();
 
-// ignore: unused_element
   _SocialAccount _default(
-      {@required Icon icon,
-      @required String name,
-      @required String Function(String) prelink,
-      @required String identifier}) {
+      {required Icon icon,
+      required String name,
+      required String Function(String) prelink,
+      required String identifier}) {
     return _SocialAccount(
       icon: icon,
       name: name,
@@ -29,18 +31,18 @@ class _$SocialAccountTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $SocialAccount = _$SocialAccountTearOff();
 
 /// @nodoc
 mixin _$SocialAccount {
-  Icon get icon;
-  String get name;
-  String Function(String) get prelink;
-  String get identifier;
+  Icon get icon => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String Function(String) get prelink => throw _privateConstructorUsedError;
+  String get identifier => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SocialAccountCopyWith<SocialAccount> get copyWith;
+  $SocialAccountCopyWith<SocialAccount> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -66,19 +68,28 @@ class _$SocialAccountCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object icon = freezed,
-    Object name = freezed,
-    Object prelink = freezed,
-    Object identifier = freezed,
+    Object? icon = freezed,
+    Object? name = freezed,
+    Object? prelink = freezed,
+    Object? identifier = freezed,
   }) {
     return _then(_value.copyWith(
-      icon: icon == freezed ? _value.icon : icon as Icon,
-      name: name == freezed ? _value.name : name as String,
+      icon: icon == freezed
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as Icon,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       prelink: prelink == freezed
           ? _value.prelink
-          : prelink as String Function(String),
-      identifier:
-          identifier == freezed ? _value.identifier : identifier as String,
+          : prelink // ignore: cast_nullable_to_non_nullable
+              as String Function(String),
+      identifier: identifier == freezed
+          ? _value.identifier
+          : identifier // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -110,19 +121,28 @@ class __$SocialAccountCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object icon = freezed,
-    Object name = freezed,
-    Object prelink = freezed,
-    Object identifier = freezed,
+    Object? icon = freezed,
+    Object? name = freezed,
+    Object? prelink = freezed,
+    Object? identifier = freezed,
   }) {
     return _then(_SocialAccount(
-      icon: icon == freezed ? _value.icon : icon as Icon,
-      name: name == freezed ? _value.name : name as String,
+      icon: icon == freezed
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as Icon,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       prelink: prelink == freezed
           ? _value.prelink
-          : prelink as String Function(String),
-      identifier:
-          identifier == freezed ? _value.identifier : identifier as String,
+          : prelink // ignore: cast_nullable_to_non_nullable
+              as String Function(String),
+      identifier: identifier == freezed
+          ? _value.identifier
+          : identifier // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -130,15 +150,11 @@ class __$SocialAccountCopyWithImpl<$Res>
 /// @nodoc
 class _$_SocialAccount extends _SocialAccount {
   _$_SocialAccount(
-      {@required this.icon,
-      @required this.name,
-      @required this.prelink,
-      @required this.identifier})
-      : assert(icon != null),
-        assert(name != null),
-        assert(prelink != null),
-        assert(identifier != null),
-        super._();
+      {required this.icon,
+      required this.name,
+      required this.prelink,
+      required this.identifier})
+      : super._();
 
   @override
   final Icon icon;
@@ -149,21 +165,9 @@ class _$_SocialAccount extends _SocialAccount {
   @override
   final String identifier;
 
-  bool _didlink = false;
-  String _link;
-
-  @override
-  String get link {
-    if (_didlink == false) {
-      _didlink = true;
-      _link = prelink(identifier);
-    }
-    return _link;
-  }
-
   @override
   String toString() {
-    return 'SocialAccount._default(icon: $icon, name: $name, prelink: $prelink, identifier: $identifier, link: $link)';
+    return 'SocialAccount._default(icon: $icon, name: $name, prelink: $prelink, identifier: $identifier)';
   }
 
   @override
@@ -197,22 +201,23 @@ class _$_SocialAccount extends _SocialAccount {
 }
 
 abstract class _SocialAccount extends SocialAccount {
-  _SocialAccount._() : super._();
   factory _SocialAccount(
-      {@required Icon icon,
-      @required String name,
-      @required String Function(String) prelink,
-      @required String identifier}) = _$_SocialAccount;
+      {required Icon icon,
+      required String name,
+      required String Function(String) prelink,
+      required String identifier}) = _$_SocialAccount;
+  _SocialAccount._() : super._();
 
   @override
-  Icon get icon;
+  Icon get icon => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  String Function(String) get prelink;
+  String Function(String) get prelink => throw _privateConstructorUsedError;
   @override
-  String get identifier;
+  String get identifier => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SocialAccountCopyWith<_SocialAccount> get copyWith;
+  _$SocialAccountCopyWith<_SocialAccount> get copyWith =>
+      throw _privateConstructorUsedError;
 }

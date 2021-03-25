@@ -6,5 +6,7 @@
         "**/CVS": false,
         "**/.DS_Store": false
     },
-    "explorerExclude.backup": null
+    "explorerExclude.backup": null,
+    "dart.flutterSdkPath": "/opt/flutter_beta",
+    "dart.sdkPath": "/opt/flutter_beta/bin/cache/dart-sdk"
 }

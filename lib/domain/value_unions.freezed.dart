@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'value_unions.dart';
 
@@ -9,58 +9,61 @@ part of 'value_unions.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$SocialShareWidgetTearOff {
   const _$SocialShareWidgetTearOff();
 
-// ignore: unused_element
   _Show show() {
     return const _Show();
   }
 
-// ignore: unused_element
   _Edit edit() {
     return const _Edit();
   }
 
-// ignore: unused_element
   _Ask ask() {
     return const _Ask();
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $SocialShareWidget = _$SocialShareWidgetTearOff();
 
 /// @nodoc
 mixin _$SocialShareWidget {
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult show(),
-    @required TResult edit(),
-    @required TResult ask(),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() show,
+    required TResult Function() edit,
+    required TResult Function() ask,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult show(),
-    TResult edit(),
-    TResult ask(),
-    @required TResult orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? show,
+    TResult Function()? edit,
+    TResult Function()? ask,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult show(_Show value),
-    @required TResult edit(_Edit value),
-    @required TResult ask(_Ask value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Show value) show,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Ask value) ask,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult show(_Show value),
-    TResult edit(_Edit value),
-    TResult ask(_Ask value),
-    @required TResult orElse(),
-  });
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Show value)? show,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Ask value)? ask,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -115,26 +118,22 @@ class _$_Show implements _Show {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult show(),
-    @required TResult edit(),
-    @required TResult ask(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() show,
+    required TResult Function() edit,
+    required TResult Function() ask,
   }) {
-    assert(show != null);
-    assert(edit != null);
-    assert(ask != null);
     return show();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult show(),
-    TResult edit(),
-    TResult ask(),
-    @required TResult orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? show,
+    TResult Function()? edit,
+    TResult Function()? ask,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (show != null) {
       return show();
     }
@@ -143,26 +142,22 @@ class _$_Show implements _Show {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult show(_Show value),
-    @required TResult edit(_Edit value),
-    @required TResult ask(_Ask value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Show value) show,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Ask value) ask,
   }) {
-    assert(show != null);
-    assert(edit != null);
-    assert(ask != null);
     return show(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult show(_Show value),
-    TResult edit(_Edit value),
-    TResult ask(_Ask value),
-    @required TResult orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Show value)? show,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Ask value)? ask,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (show != null) {
       return show(this);
     }
@@ -209,26 +204,22 @@ class _$_Edit implements _Edit {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult show(),
-    @required TResult edit(),
-    @required TResult ask(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() show,
+    required TResult Function() edit,
+    required TResult Function() ask,
   }) {
-    assert(show != null);
-    assert(edit != null);
-    assert(ask != null);
     return edit();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult show(),
-    TResult edit(),
-    TResult ask(),
-    @required TResult orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? show,
+    TResult Function()? edit,
+    TResult Function()? ask,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (edit != null) {
       return edit();
     }
@@ -237,26 +228,22 @@ class _$_Edit implements _Edit {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult show(_Show value),
-    @required TResult edit(_Edit value),
-    @required TResult ask(_Ask value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Show value) show,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Ask value) ask,
   }) {
-    assert(show != null);
-    assert(edit != null);
-    assert(ask != null);
     return edit(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult show(_Show value),
-    TResult edit(_Edit value),
-    TResult ask(_Ask value),
-    @required TResult orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Show value)? show,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Ask value)? ask,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (edit != null) {
       return edit(this);
     }
@@ -303,26 +290,22 @@ class _$_Ask implements _Ask {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult show(),
-    @required TResult edit(),
-    @required TResult ask(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() show,
+    required TResult Function() edit,
+    required TResult Function() ask,
   }) {
-    assert(show != null);
-    assert(edit != null);
-    assert(ask != null);
     return ask();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult show(),
-    TResult edit(),
-    TResult ask(),
-    @required TResult orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? show,
+    TResult Function()? edit,
+    TResult Function()? ask,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (ask != null) {
       return ask();
     }
@@ -331,26 +314,22 @@ class _$_Ask implements _Ask {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult show(_Show value),
-    @required TResult edit(_Edit value),
-    @required TResult ask(_Ask value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Show value) show,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Ask value) ask,
   }) {
-    assert(show != null);
-    assert(edit != null);
-    assert(ask != null);
     return ask(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult show(_Show value),
-    TResult edit(_Edit value),
-    TResult ask(_Ask value),
-    @required TResult orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Show value)? show,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Ask value)? ask,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (ask != null) {
       return ask(this);
     }

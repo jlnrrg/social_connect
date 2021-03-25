@@ -10,22 +10,22 @@ import 'package:social_connect/domain/value_unions.dart';
 /// it is best to catch for [LaunchAppException]
 class SocialShare extends StatefulWidget {
   SocialShare({
-    Key key,
+    Key? key,
     this.socialShareWidget = const SocialShareWidget.show(),
-    @required this.initialSocialAccount,
+    required this.initialSocialAccount,
     this.isEdit = false,
-    @required this.onChanged,
-    @required this.onTap,
-    this.asIcon,
+    required this.onChanged,
+    required this.onTap,
+    required this.asIcon,
   }) : super(key: key);
 
   factory SocialShare.show({
-    Key key,
+    Key? key,
 
     /// shows the widget in a IconButton format
     bool asIcon = false,
-    @required SocialAccount socialAccount,
-    Future<void> Function(String url) onTap,
+    required SocialAccount socialAccount,
+    Future<void> Function(String url) onTap = _onTapNullFc,
   }) =>
       SocialShare(
         key: key,
@@ -38,9 +38,9 @@ class SocialShare extends StatefulWidget {
       );
 
   factory SocialShare.edit({
-    Key key,
-    @required SocialAccount socialAccount,
-    Function(SocialAccount) onTextChanged,
+    Key? key,
+    required SocialAccount socialAccount,
+    Function(SocialAccount)? onTextChanged,
   }) =>
       SocialShare(
         key: key,
@@ -49,7 +49,7 @@ class SocialShare extends StatefulWidget {
         isEdit: true,
         asIcon: false,
         onChanged: onTextChanged ?? (_) => null,
-        onTap: (_) => null,
+        onTap: _onTapNullFc,
       );
 
   final SocialShareWidget socialShareWidget;
@@ -58,6 +58,8 @@ class SocialShare extends StatefulWidget {
   final bool asIcon;
   final Function(SocialAccount) onChanged;
   final Future<void> Function(String url) onTap;
+
+  static Future<void> _onTapNullFc(String url) async => null;
 
   @override
   SocialShareState createState() => SocialShareState(initialSocialAccount);
@@ -75,8 +77,9 @@ class SocialShareState extends State<SocialShare> {
   Widget _buildTextFormField(BuildContext context) {
     // if onTap is null then no InkWell
     Widget inkWell(
-        {Future<void> Function(String url) onTap, @required Widget child}) {
-      return onTap != null && onTap != ((_) => null)
+        {required Future<void> Function(String url) onTap,
+        required Widget child}) {
+      return onTap != SocialShare._onTapNullFc
           ? InkWell(
               onTap: () => widget.onTap(socialAccount.link),
               child: child,
@@ -159,7 +162,7 @@ class ToIdentifierInputFormatter extends TextInputFormatter {
     final re = RegExp('(?<=$s1)(?!http)(.*)(?=$s2)');
     final match = re.firstMatch(value);
     if (match != null) {
-      return match.group(0);
+      return match.group(0) ?? value;
     } else {
       return value;
     }
